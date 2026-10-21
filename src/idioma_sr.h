@@ -10,6 +10,7 @@
   T(" · %d título", " · %d naslov"),
   T(" · %d títulos", " · %d naslova"),
   T(" · Nascido em %s", " · Rođenje: %s"),
+  T("Trakt limitou os pedidos; tentando de novo…", "Trakt je ograničio zahteve; pokušavamo ponovo…"),
   T("\"HDR\" do grupo", "\"HDR\" grupe"),
   T("\"Mais como este\"", "\"Slično ovome\""),
   T("%+d canais", "%+d kanala"),

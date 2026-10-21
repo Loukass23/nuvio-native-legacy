@@ -10,6 +10,7 @@
   T(" · %d título", " · %d عنوان"),
   T(" · %d títulos", " · %d عناوين"),
   T(" · Nascido em %s", " · وُلد في %s"),
+  T("Trakt limitou os pedidos; tentando de novo…", "قيّد Trakt الطلبات؛ جارٍ إعادة المحاولة…"),
   T("\"HDR\" do grupo", "مجموعة \"HDR\""),
   T("\"Mais como este\"", "\"المزيد مثل هذا\""),
   T("%+d canais", "%+d قناة"),

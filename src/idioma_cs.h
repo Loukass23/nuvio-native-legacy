@@ -10,6 +10,7 @@
   T(" · %d título", " · %d titul"),
   T(" · %d títulos", " · %d titulů"),
   T(" · Nascido em %s", " · Narozen(a): %s"),
+  T("Trakt limitou os pedidos; tentando de novo…", "Trakt omezil požadavky; zkoušíme znovu…"),
   T("\"HDR\" do grupo", "\"HDR\" skupiny"),
   T("\"Mais como este\"", "\"Podobné tituly\""),
   T("%+d canais", "%+d kanálů"),

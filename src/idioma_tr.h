@@ -10,6 +10,7 @@
   T(" · %d título", " · %d başlık"),
   T(" · %d títulos", " · %d başlık"),
   T(" · Nascido em %s", " · Doğum: %s"),
+  T("Trakt limitou os pedidos; tentando de novo…", "Trakt istek sınırı; yeniden deneniyor…"),
   T("\"HDR\" do grupo", "Grup \"HDR\""),
   T("\"Mais como este\"", "\"Buna benzer olanlar\""),
   T("%+d canais", "%+d kanal"),

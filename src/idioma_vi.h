@@ -10,6 +10,7 @@
   T(" · %d título", " · %d tựa"),
   T(" · %d títulos", " · %d tựa"),
   T(" · Nascido em %s", " · Sinh %s"),
+  T("Trakt limitou os pedidos; tentando de novo…", "Trakt giới hạn yêu cầu; đang thử lại…"),
   T("\"HDR\" do grupo", "\"HDR\" của nhóm"),
   T("\"Mais como este\"", "\"Nội dung tương tự\""),
   T("%+d canais", "%+d kênh"),

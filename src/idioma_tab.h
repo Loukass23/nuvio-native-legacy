@@ -9,6 +9,7 @@
   { " · %d título", " · %d title" },
   { " · %d títulos", " · %d titles" },
   { " · Nascido em %s", " · Born %s" },
+  { "Trakt limitou os pedidos; tentando de novo…", "Trakt rate limit; retrying…" },
   { "\"HDR\" do grupo", "Group \"HDR\"" },
   { "\"Mais como este\"", "\"More like this\"" },
   { "%+d canais", "%+d channels" },

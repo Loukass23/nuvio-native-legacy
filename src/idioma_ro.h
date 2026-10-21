@@ -9,6 +9,7 @@
   T(" · %d título", " · %d titlu"),
   T(" · %d títulos", " · %d titluri"),
   T(" · Nascido em %s", " · Născut(ă) la %s"),
+  T("Trakt limitou os pedidos; tentando de novo…", "Trakt a limitat cererile; reîncercăm…"),
   T("\"HDR\" do grupo", "\"HDR\" de grup"),
   T("\"Mais como este\"", "\"Mai multe ca acesta\""),
   T("%+d canais", "%+d canale"),

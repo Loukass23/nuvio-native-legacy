@@ -10,6 +10,7 @@
   T(" · %d título", " · %d título"),
   T(" · %d títulos", " · %d títulos"),
   T(" · Nascido em %s", " · Nascido em %s"),
+  T("Trakt limitou os pedidos; tentando de novo…", "Trakt limitou os pedidos; a tentar de novo…"),
   T("\"HDR\" do grupo", "\"HDR\" do grupo"),
   T("\"Mais como este\"", "\"Mais como este\""),
   T("%+d canais", "%+d canais"),

@@ -10,6 +10,7 @@
   T(" · %d título", " · %d cím"),
   T(" · %d títulos", " · %d cím"),
   T(" · Nascido em %s", " · Született: %s"),
+  T("Trakt limitou os pedidos; tentando de novo…", "Trakt kéréskorlát; újrapróbálkozás…"),
   T("\"HDR\" do grupo", "Csoport \"HDR\""),
   T("\"Mais como este\"", "\"Hasonló címek\""),
   T("%+d canais", "%+d csatorna"),

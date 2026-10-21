@@ -9,6 +9,7 @@
   T(" · %d título", " · %d название"),
   T(" · %d títulos", " · %d названий"),
   T(" · Nascido em %s", " · Родился(ась): %s"),
+  T("Trakt limitou os pedidos; tentando de novo…", "Trakt ограничил запросы; повторная попытка…"),
   T("\"HDR\" do grupo", "\"HDR\" группы"),
   T("\"Mais como este\"", "\"Больше похожего\""),
   T("%+d canais", "%+d каналов"),

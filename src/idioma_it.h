@@ -10,6 +10,7 @@
   T(" · %d título", " · %d titolo"),
   T(" · %d títulos", " · %d titoli"),
   T(" · Nascido em %s", " · Nascita: %s"),
+  T("Trakt limitou os pedidos; tentando de novo…", "Limite richieste Trakt; nuovo tentativo…"),
   T("\"HDR\" do grupo", "\"HDR\" del gruppo"),
   T("\"Mais como este\"", "\"Simili a questo\""),
   T("%+d canais", "%+d canali"),

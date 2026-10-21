@@ -10,6 +10,7 @@
   T(" · %d título", " · %d judul"),
   T(" · %d títulos", " · %d judul"),
   T(" · Nascido em %s", " · Lahir %s"),
+  T("Trakt limitou os pedidos; tentando de novo…", "Trakt membatasi permintaan; mencoba lagi…"),
   T("\"HDR\" do grupo", "\"HDR\" grup"),
   T("\"Mais como este\"", "\"Lainnya yang serupa\""),
   T("%+d canais", "%+d kanal"),

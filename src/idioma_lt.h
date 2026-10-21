@@ -10,6 +10,7 @@
   T(" · %d título", " · %d pavadinimas"),
   T(" · %d títulos", " · %d pavadinimai"),
   T(" · Nascido em %s", " · Gimimo data: %s"),
+  T("Trakt limitou os pedidos; tentando de novo…", "Trakt užklausų limitas; bandoma dar kartą…"),
   T("\"HDR\" do grupo", "Grupės \"HDR\""),
   T("\"Mais como este\"", "\"Panašu į šį\""),
   T("%+d canais", "%+d kanalai"),

@@ -10,6 +10,7 @@
   T(" · %d título", " · %d 个标题"),
   T(" · %d títulos", " · %d 个标题"),
   T(" · Nascido em %s", " · 出生于 %s"),
+  T("Trakt limitou os pedidos; tentando de novo…", "Trakt 请求受限；正在重试…"),
   T("\"HDR\" do grupo", "分组 \"HDR\""),
   T("\"Mais como este\"", "\"类似推荐\""),
   T("%+d canais", "%+d 个频道"),

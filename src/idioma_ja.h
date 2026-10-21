@@ -10,6 +10,7 @@
   T(" · %d título", " · %d 作品"),
   T(" · %d títulos", " · %d 作品"),
   T(" · Nascido em %s", " · 生まれ: %s"),
+  T("Trakt limitou os pedidos; tentando de novo…", "Traktのリクエスト制限。再試行中…"),
   T("\"HDR\" do grupo", "グループの\"HDR\""),
   T("\"Mais como este\"", "\"これに似た作品\""),
   T("%+d canais", "%+d チャンネル"),

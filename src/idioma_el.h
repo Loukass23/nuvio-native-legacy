@@ -10,6 +10,7 @@
   T(" · %d título", " · %d τίτλος"),
   T(" · %d títulos", " · %d τίτλοι"),
   T(" · Nascido em %s", " · Γεννήθηκε %s"),
+  T("Trakt limitou os pedidos; tentando de novo…", "Όριο αιτημάτων Trakt· νέα προσπάθεια…"),
   T("\"HDR\" do grupo", "\"HDR\" ομάδας"),
   T("\"Mais como este\"", "\"Περισσότερα σαν αυτό\""),
   T("%+d canais", "%+d κανάλια"),

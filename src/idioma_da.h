@@ -10,6 +10,7 @@
   T(" · %d título", " · %d titel"),
   T(" · %d títulos", " · %d titler"),
   T(" · Nascido em %s", " · Født %s"),
+  T("Trakt limitou os pedidos; tentando de novo…", "Trakt begrænser forespørgsler; prøver igen…"),
   T("\"HDR\" do grupo", "Gruppens \"HDR\""),
   T("\"Mais como este\"", "\"Mere som denne\""),
   T("%+d canais", "%+d kanaler"),
