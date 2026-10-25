@@ -524,9 +524,8 @@ int legenda_extrair(const char *corpo, LegendaCue **saida) {
 // devolve texto e o strlen parava no primeiro zero.
 //
 // Try UTF-16 BOM, UTF-8 BOM, then valid UTF-8 before guessing 8-bit encodings.
-// Whole words of high bytes suggest Cyrillic or
-// Arabic; distinct common letter pairs separate Greek from Cyrillic. Turkish
-// capital dotted I next to ASCII letters can override the Latin fallback.
+// Whole words of high bytes suggest Cyrillic or Arabic. Only strong Greek or
+// Turkish evidence overrides the legacy fallback.
 //
 // ARABE (Windows-1256, #247 #261) tambem e feito de palavras de bytes altos, e
 // se separa do cirilico pela FAIXA: no 1256 as letras ficam em 0xC1-0xDF mais
@@ -618,39 +617,22 @@ char *legenda_utf8(const char *bytes, long n, const char **origem) {
       memcpy(out, b, (size_t)n); out[n] = 0;
     } else {
       long altos = 0, colados = 0, soRusso = 0, soltasArabe = 0;
-      long gregas = 0, russas = 0, turcas = 0, latinas = 0;
+      long gregas = 0, turcas = 0, latinas = 0, letrasGregas = 0;
       int cir, ara, gre, tur;
-      unsigned gregasVistas = 0;
-      // ponytail: ambiguous bytes keep the fallback; language hints would resolve them.
-      static const unsigned short paresGregos[] = {
-        0xE5E9,0xE9E1,0xF3EF,0xEFF5,0xEAFC,0xFCF3,0xF3EC,0xECE5,
-        0xEAE1,0xE1EB,0xEBE7,0xE7EC,0xECDD,0xDDF1,0xF1E1,0xE5DF,
-        0xDFF0,0xF0E5,0xF4EF,0xEDE1,0xE1E9,0xF4E7,0xF3E5,0xE5F2 };
-      static const unsigned short paresRussos[] = {
-        0xF1F2,0xEDEE,0xF2EE,0xEDE0,0xE5ED,0xEEE2,0xEDE8,0xF0E0,
-        0xE2EE,0xEAEE,0xEFF0,0xF0E8,0xE2E5,0xE5F2,0xEAE0,0xE4E5,
-        0xEBE0,0xEEF1,0xF2FC,0xF2E0,0xE5F0,0xEEF0,0xEEEB,0xF0EE };
+      // ponytail: ambiguous text keeps legacy decoding; language hints can resolve it.
       for (i = 0; i < n; i++) {
         unsigned c = b[i];
         if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) latinas++;
-        // Ğ/ğ/Ş/ş/ı share bytes with Icelandic Ð/ð/Þ/þ/ý; insufficient evidence.
-        if (c == 0xDD &&
-            ((i && ((b[i-1] >= 'A' && b[i-1] <= 'Z') || (b[i-1] >= 'a' && b[i-1] <= 'z'))) ||
-             (i + 1 < n && ((b[i+1] >= 'A' && b[i+1] <= 'Z') || (b[i+1] >= 'a' && b[i+1] <= 'z')))))
+        // Turkish ığı (a common suffix), not isolated İ/ı/ş shared with Ý/ý/þ.
+        if (c == 0xFD && i + 2 < n && b[i+1] == 0xF0 && b[i+2] == 0xFD)
           turcas++;
-        if (i + 1 < n && c >= 0xC0 && b[i+1] >= 0xC0) {
-          unsigned a = c, z = b[i+1];
-          if (a >= 0xC1 && a <= 0xD9) a += 0x20;
-          if (z >= 0xC1 && z <= 0xD9) z += 0x20;
-          unsigned par = a << 8 | z;
-          for (size_t k = 0; k < sizeof paresGregos / sizeof paresGregos[0]; k++)
-            if (par == paresGregos[k] && !(gregasVistas & (1u << k))) {
-              gregasVistas |= 1u << k;
-              gregas++;
-            }
-          for (size_t k = 0; k < sizeof paresRussos / sizeof paresRussos[0]; k++)
-            if (par == paresRussos[k]) russas++;
-        }
+        // Accented Greek capitals at bytes that are not Russian letters.
+        if (c == 0xA2 || c == 0xBA || c == 0xBC || c == 0xBE || c == 0xBF)
+          gregas++;
+        if (c >= 0xC1 && c <= 0xF9 && c != 0xD2 &&
+            ((i && b[i-1] >= 0xC1 && b[i-1] <= 0xF9) ||
+             (i + 1 < n && b[i+1] >= 0xC1 && b[i+1] <= 0xF9)))
+          letrasGregas++;
         if (c >= 0xC0) {
           altos++;
           if ((i && b[i-1] >= 0xC0) || (i + 1 < n && b[i+1] >= 0xC0)) colados++;
@@ -660,7 +642,7 @@ char *legenda_utf8(const char *bytes, long n, const char **origem) {
       }
       cir = altos >= 8 && colados * 2 > altos;
       ara = cir && soRusso * 10 < altos && soltasArabe * 10 >= altos;
-      gre = cir && !ara && gregas >= 4 && gregas > russas * 2;
+      gre = cir && !ara && gregas >= 2 && letrasGregas >= 12 && letrasGregas * 4 >= altos * 3;
       tur = !ara && !gre && latinas >= 4 && latinas * 2 > altos && turcas >= 1;
       if (ara || gre || tur) cir = 0;
       o = ara ? "windows-1256" : gre ? "windows-1253" : tur ? "windows-1254" : cir ? "windows-1251" : "windows-1252";
