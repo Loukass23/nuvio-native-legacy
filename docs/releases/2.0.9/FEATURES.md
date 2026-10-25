@@ -2,7 +2,7 @@
 
 Changes since `v2.0.8`, from local commit and branch snapshots. Integration does not confirm installation on a TV. English follows the owner’s current language override.
 
-Tracking refreshed against the supplied snapshot through `940288b03`; all listed non-merge commits remain covered. Android build and installation succeeded at `cb7ece972`; C9 installation failed, leaving the installed TV revision unconfirmed. See the keeper state report for subsequent merges.
+Tracking refreshed against the supplied snapshot through `0152ed9bf`; all listed non-merge commits remain covered. Android build and installation succeeded at `cb7ece972`; C9 installation failed, leaving the installed TV revision unconfirmed. See the keeper state report for subsequent merges.
 
 
 ## Highlights
@@ -35,6 +35,10 @@ Tracking refreshed against the supplied snapshot through `940288b03`; all listed
 - **See all in the Library row**: Open the full Library from a See all card at the end of the Home row. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: #672, `d316b4dbd`.
 
 ## Fixes
+
+- **Long signed source URLs remain playable**: Preserve complete signed media URLs up to 8191 bytes across playback and saved sources, release their storage with source lists, and skip oversized entries without discarding playable alternatives. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: owner request, `agente/205-urllonga`, `26ddf22d7`, `01d39cbb2`, merge `0152ed9bf`.
+
+- **Focus accents recover consistently**: Restore accent focus independently of the Glass setting. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: owner request, `agente/205-amigosacento`, `790abb451`, merge `93c397353`.
 
 - **Reach the clock with Up**: Navigate from Home rows to the clock and resume island using Up. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: PR #547, @ghbarker, merge `f895747c5`.
 
@@ -169,7 +173,7 @@ Tracking refreshed against the supplied snapshot through `940288b03`; all listed
 
 ## Internal
 
-- **Latest tracking snapshot**: Keep issue tracking aligned with the integration snapshot. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: `5404c634b`.
+- **Latest tracking snapshot**: Keep issue tracking aligned with the integration snapshot. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: `5404c634b`, `f6a6c3934`.
 
 - **Episode and playback regression coverage**: Validate alternate numbering, topology replacement, retries, canonical scrobbles and isolated Home refresh fixtures. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: `6537b2a36`, `be51fbfd0`, `587b8774b`, `f3ccc5b23`.
 
