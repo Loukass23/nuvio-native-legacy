@@ -54,6 +54,7 @@ void legenda_carregar(const char *url);
  * exatamente uma vez, inclusive em falha, e nao pode tocar a UI. */
 typedef void (*LegendaBaixada)(const char *corpo, unsigned geracao, int vigente, void *u);
 unsigned legenda_carregar_com(const char *url, LegendaBaixada pronto, void *u);
+unsigned legenda_carregar_idioma(const char *url, const char *idioma, LegendaBaixada pronto, void *u);
 // Um candidato por play; carregar_com adota pelo link, no mesmo fio/callback.
 void legenda_pre_baixar(const char *url);
 void legenda_pre_descartar(const char *motivo);
@@ -86,10 +87,15 @@ int  legenda_cues(double posSeg, int atrasoMs, LegendaCue *dst, int max);
  * devolvia ZERO blocos e a tela ficava sem legenda sem dizer por que. */
 int legenda_extrair(const char *corpo, LegendaCue **saida);
 // Subtitle bytes -> NUL-terminated UTF-8 (malloc; caller frees).
-// UTF-16 with BOM, UTF-8 with/without BOM, otherwise heuristic Windows
-// 1252/1251/1253/1254/1256. Optional `origem` reports the detected encoding.
+// UTF-16 with BOM, UTF-8 with/without BOM, otherwise the legacy Windows
+// 1252/1251/1256 detector. Optional `origem` reports the detected encoding.
 // Returns NULL for invalid arguments or allocation failure.
 char *legenda_utf8(const char *bytes, long n, const char **origem);
+// Declared Greek/Turkish selects 1253/1254 only after BOM/UTF-8 handling.
+char *legenda_utf8_idioma(const char *bytes, long n, const char *idioma,
+                         const char *arquivo, const char **origem);
+// Explicit metadata first; otherwise bounded .el./.gre./.ell./.tr./.tur. tags.
+const char *legenda_idioma(const char *idioma, const char *arquivo);
 
 /* Os dois parsers, expostos para o teste poder cobrir cada um sem depender da
  * heuristica de deteccao. */

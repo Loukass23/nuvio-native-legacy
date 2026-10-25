@@ -1481,7 +1481,8 @@ static void *buscarUmAddon(void *u) {
       // Subtitle Sync serves explanatory SRTs as notice-* entries, not dialogue.
       if (!strncmp(id, "error.", 6) || !strncmp(id, "notice-", 7)) { q = js_prox(f); continue; }
       if (*q == '{' && episodioCorreto(q, f, B->temporada, B->episodio) &&
-          js_texto(q, f, "lang", l, sizeof l)) {
+          (js_texto(q, f, "lang", l, sizeof l) ||
+           js_texto(q, f, "language", l, sizeof l))) {
         // "PORTUGUESE" / "Portuguese (Brazil)" / "por" / "pt-BR" viram um
         // codigo so; antes o nome entrava cortado em 8 bytes ("PORTUGU") e
         // nao casava com a preferencia.
