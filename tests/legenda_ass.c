@@ -181,6 +181,8 @@ int main(void) {
       { "\xDDmislegt er n\xFDtt.", "Ýmislegt er nýtt.", "windows-1252" },
       { "\xDDttu \xE1 takkann.", "Ýttu á takkann.", "windows-1252" },
       { "\xD3\xEC\xE5\xE9, \xF3\xEC\xE5\xE9, \xF3\xEC\xE5\xE9!", "Умей, умей, умей!", "windows-1251" },
+      // Ukrainian є/ї share bytes with accented Greek capitals.
+      { "\xD6\xE5 \xBF\xBF \xF3\xEA\xF0\xE0\xBF\xED\xF1\xFC\xEA\xE0 \xEC\xEE\xE2\xE0. \xC2\xEE\xED\xE0 \xF7\xE8\xF2\xE0\xBA \xEA\xED\xE8\xE6\xEA\xE8.", "Це її українська мова. Вона читає книжки.", "windows-1251" },
       // A lone Turkish ş shares its byte with Icelandic þ: preserve the fallback.
       { "Her \xFE" "ey \xE7ok g\xFCzel.", "Her þey çok güzel.", "windows-1252" },
       { "Γεια σου κόσμε — İstanbul", "Γεια σου κόσμε — İstanbul", "utf-8" }

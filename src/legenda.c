@@ -618,6 +618,7 @@ char *legenda_utf8(const char *bytes, long n, const char **origem) {
     } else {
       long altos = 0, colados = 0, soRusso = 0, soltasArabe = 0;
       long gregas = 0, turcas = 0, latinas = 0, letrasGregas = 0;
+      int gregaNaoCirilica = 0;
       int cir, ara, gre, tur;
       // ponytail: ambiguous text keeps legacy decoding; language hints can resolve it.
       for (i = 0; i < n; i++) {
@@ -626,7 +627,8 @@ char *legenda_utf8(const char *bytes, long n, const char **origem) {
         // Turkish ığı (a common suffix), not isolated İ/ı/ş shared with Ý/ý/þ.
         if (c == 0xFD && i + 2 < n && b[i+1] == 0xF0 && b[i+2] == 0xFD)
           turcas++;
-        // Accented Greek capitals at bytes that are not Russian letters.
+        // Require evidence beyond 0xBA/0xBF, also Ukrainian є/ї in CP1251.
+        if (c == 0xA2 || c == 0xBC || c == 0xBE) gregaNaoCirilica = 1;
         if (c == 0xA2 || c == 0xBA || c == 0xBC || c == 0xBE || c == 0xBF)
           gregas++;
         if (c >= 0xC1 && c <= 0xF9 && c != 0xD2 &&
@@ -642,7 +644,7 @@ char *legenda_utf8(const char *bytes, long n, const char **origem) {
       }
       cir = altos >= 8 && colados * 2 > altos;
       ara = cir && soRusso * 10 < altos && soltasArabe * 10 >= altos;
-      gre = cir && !ara && gregas >= 2 && letrasGregas >= 12 && letrasGregas * 4 >= altos * 3;
+      gre = cir && !ara && gregaNaoCirilica && gregas >= 2 && letrasGregas >= 12 && letrasGregas * 4 >= altos * 3;
       tur = !ara && !gre && latinas >= 4 && latinas * 2 > altos && turcas >= 1;
       if (ara || gre || tur) cir = 0;
       o = ara ? "windows-1256" : gre ? "windows-1253" : tur ? "windows-1254" : cir ? "windows-1251" : "windows-1252";
