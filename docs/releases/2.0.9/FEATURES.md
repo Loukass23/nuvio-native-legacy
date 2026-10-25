@@ -173,7 +173,7 @@ Tracking refreshed against the supplied snapshot through `0152ed9bf`; all listed
 
 ## Internal
 
-- **Latest tracking snapshot**: Keep issue tracking aligned with the integration snapshot. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: `5404c634b`, `f6a6c3934`.
+- **Latest tracking snapshot**: Keep issue tracking aligned with the integration snapshot. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: `5404c634b`, `f6a6c3934`, `70e3ed2d3`.
 
 - **Episode and playback regression coverage**: Validate alternate numbering, topology replacement, retries, canonical scrobbles and isolated Home refresh fixtures. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: `6537b2a36`, `be51fbfd0`, `587b8774b`, `f3ccc5b23`.
 
