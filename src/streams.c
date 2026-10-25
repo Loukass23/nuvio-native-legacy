@@ -489,6 +489,33 @@ static int mesmoAddon(const Stream *a, const Stream *b) {
     return !strcmp(a->addonChave, b->addonChave);
   return !strcmp(a->provedor, b->provedor);
 }
+// Native routes identify the service explicitly; add-on labels identify
+// their own debrid routes. Unknown labels stay scoped to that add-on.
+static int debridDaFonte(const Stream *s) {
+  if (s->debridServico > 0) return s->debridServico - 1;
+  const char *tags[] = {"[RD", "[TB", "[PM", "[AD"};
+  const char *names[] = {"Real-Debrid", "TorBox", "Premiumize", "AllDebrid"};
+  for (int i = 0; i < DEBRID_N; i++)
+    if (nv_res_tem(s->rotulo, tags[i]) || nv_res_tem(s->rotulo, names[i])) return i;
+  return -1;
+}
+int stream_automatico_excluir_aviso(int indice) {
+  int k = 0;
+  pthread_mutex_lock(&verTrava);
+  if (indice >= 0 && indice < n) {
+    const Stream *s = &lista[indice];
+    int servico = debridDaFonte(s);
+    for (int i = 0; i < n; i++) {
+      const Stream *outra = &lista[i];
+      int mesma = s->debridServico > 0
+          ? outra->debridServico == s->debridServico
+          : !outra->debridServico && mesmoAddon(s, outra) && debridDaFonte(outra) == servico;
+      if (mesma) k += stream_automatico_excluir(i);
+    }
+  }
+  pthread_mutex_unlock(&verTrava);
+  return k;
+}
 static int irma(int i, int indice) {
   return i != indice && mesmoAddon(&lista[i], &lista[indice]) &&
          !strcmp(lista[i].rotulo, lista[indice].rotulo);
