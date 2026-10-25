@@ -3601,8 +3601,15 @@ static void durFonteAtualizar(double real, Uint32 agora) {
   if (esperada <= 0 || fabs(real - esperada) <= 600 ||
       !(real > esperada * 2 || real < esperada * .5)) return;
   durFonteAvisada = 1;
-  // A short warning clip is not another edition or a playable movie part.
-  if (real <= 120 && real < esperada * .5) {
+  durFonteCurta = real < esperada * .5;
+  if (duracaook_tem(sessao_usuario(), perfis_ativo(), durFonteTitulo())) {
+    printf("[fonte] duracao incompatível: real=%.0fs esperada=%.0fs; kept: this title keeps sources of another length (OK earlier)\n",
+           real, esperada);
+    fflush(stdout);
+    return;
+  }
+  // Only auto-play rejects short clips; manual choices retain the duration warning.
+  if (tentativaN > 0 && real <= 120 && real < esperada * .5) {
     durFonteForaCache = 1;
     durFonteCurta = 0;
     durFonteSkipEm = durFonteAcaoAte = toastAte = 0;
@@ -3611,13 +3618,6 @@ static void durFonteAtualizar(double real, Uint32 agora) {
     player_erro_fonte_motivo(i18n("Fora do cache"),
         i18n("O link levou a um vídeo de aviso: expirado ou fora de cache."));
     printf("[fonte] warning clip: real=%.0fs expected=%.0fs; stopped, not cached\n", real, esperada);
-    fflush(stdout);
-    return;
-  }
-  durFonteCurta = real < esperada * .5;
-  if (duracaook_tem(sessao_usuario(), perfis_ativo(), durFonteTitulo())) {
-    printf("[fonte] duracao incompatível: real=%.0fs esperada=%.0fs; kept: this title keeps sources of another length (OK earlier)\n",
-           real, esperada);
     fflush(stdout);
     return;
   }

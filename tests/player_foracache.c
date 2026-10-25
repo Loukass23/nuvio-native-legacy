@@ -87,11 +87,20 @@ int main(void) {
   reset(); n = 2; durFonteAtualizar(27, 100); tentarProximaFonteVOD();
   assert(!requested && !fonteVODAutomatica && failed);
   n = 5;
-  reset(); kept = 1; durFonteAtualizar(120, 100); assert(stopped && failed);
+  reset(); kept = 1; durFonteAtualizar(90, 100);
+  assert(!stopped && !failed && comVideo && !durFonteForaCache && !durFonteSkipEm);
+  assert(durFonteCurta);
+  tentarProximaFonteVOD(); assert(!requested && !excluded[0]);
   reset(); durFonteAtualizar(121, 100); assert(!stopped && durFonteSkipEm);
   reset(); expected = 30; durFonteAtualizar(27, 100); assert(!stopped && !failed);
   expected = 2580;
-  reset(); tentativaN = 0; durFonteAtualizar(30, 100); assert(stopped && failed);
+  reset(); tentativaN = 0; durFonteAtualizar(90, 100);
+  assert(!stopped && !failed && comVideo && !durFonteForaCache && !durFonteSkipEm);
+  assert(durFonteCurta && durFonteAcaoAte);
+  tentarProximaFonteVOD(); assert(!requested && !excluded[0]);
+  reset(); kept = 1; durFonteAtualizar(90, 100);
+  assert(!stopped && !failed && !durFonteForaCache && !durFonteAcaoAte);
+  tentativaN = 1;
   reset(); parts = 1; durFonteAtualizar(30, 100); assert(!stopped && !failed);
   reset(); lista[0].debridServico = lista[1].debridServico = DEBRID_TB + 1;
   strcpy(lista[1].addonChave, "other");
@@ -99,5 +108,5 @@ int main(void) {
   durFonteAtualizar(30, 100); tentarProximaFonteVOD();
   assert(refused == DEBRID_TB && requested == 1);
   assert(excluded[0] && excluded[1] && !excluded[2]);
-  puts("PASS: warning clips stop immediately; provider skipped; alternatives preserved");
+  puts("PASS: auto warning clips stop; manual and kept clips play; provider alternatives preserved");
 }
