@@ -526,7 +526,7 @@ int legenda_extrair(const char *corpo, LegendaCue **saida) {
 // Try UTF-16 BOM, UTF-8 BOM, then valid UTF-8 before guessing 8-bit encodings.
 // Whole words of high bytes suggest Cyrillic or
 // Arabic; distinct common letter pairs separate Greek from Cyrillic. Turkish
-// dotted/dotless I next to ASCII letters can override the Latin fallback.
+// capital dotted I next to ASCII letters can override the Latin fallback.
 //
 // ARABE (Windows-1256, #247 #261) tambem e feito de palavras de bytes altos, e
 // se separa do cirilico pela FAIXA: no 1256 as letras ficam em 0xC1-0xDF mais
@@ -633,8 +633,8 @@ char *legenda_utf8(const char *bytes, long n, const char **origem) {
       for (i = 0; i < n; i++) {
         unsigned c = b[i];
         if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) latinas++;
-        // Ğ/ğ/Ş/ş share bytes with Icelandic Ð/ð/Þ/þ; insufficient evidence.
-        if ((c == 0xDD || c == 0xFD) &&
+        // Ğ/ğ/Ş/ş/ı share bytes with Icelandic Ð/ð/Þ/þ/ý; insufficient evidence.
+        if (c == 0xDD &&
             ((i && ((b[i-1] >= 'A' && b[i-1] <= 'Z') || (b[i-1] >= 'a' && b[i-1] <= 'z'))) ||
              (i + 1 < n && ((b[i+1] >= 'A' && b[i+1] <= 'Z') || (b[i+1] >= 'a' && b[i+1] <= 'z')))))
           turcas++;

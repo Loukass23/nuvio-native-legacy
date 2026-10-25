@@ -175,6 +175,8 @@ int main(void) {
       { "\xC9T\xC9 \xC0 PARIS \x97 No\xEBl", "ÉTÉ À PARIS — Noël", "windows-1252" },
       { "\xDEingvellir \xF0 og \xFE", "Þingvellir ð og þ", "windows-1252" },
       { "\xDE" "a\xF0 er \xFE" "etta.", "Það er þetta.", "windows-1252" },
+      { "\xDE" "a\xF0 er n\xFDtt.", "Það er nýtt.", "windows-1252" },
+      { "N\xFDtt, n\xFDtt, n\xFDtt!", "Nýtt, nýtt, nýtt!", "windows-1252" },
       { "\xD3\xEC\xE5\xE9, \xF3\xEC\xE5\xE9, \xF3\xEC\xE5\xE9!", "Умей, умей, умей!", "windows-1251" },
       // A lone Turkish ş shares its byte with Icelandic þ: preserve the fallback.
       { "Her \xFE" "ey \xE7ok g\xFCzel.", "Her þey çok güzel.", "windows-1252" },
