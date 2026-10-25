@@ -523,13 +523,10 @@ int legenda_extrair(const char *corpo, LegendaCue **saida) {
 // UTF-16 (com BOM) tem zeros no meio e nem chegava ao parser — rede_baixar
 // devolve texto e o strlen parava no primeiro zero.
 //
-// A ORDEM: BOM de UTF-16 -> converte; BOM de UTF-8 -> tira; UTF-8 valido ->
-// fica; o resto e um codepage de 8 bits. Entre os de 8 bits so da para
-// ADIVINHAR, e a adivinhacao aqui e uma so: texto cirilico (Windows-1251) e
-// feito de PALAVRAS inteiras de bytes altos, enquanto o latino tem o acento
-// solto entre letras ASCII. Mais da metade dos bytes altos com vizinho alto ->
-// 1251; senao 1252. Grego, turco etc. em codepage proprio NAO estao cobertos
-// (sairiam como letras latinas erradas, nao quadrados).
+// Try UTF-16 BOM, UTF-8 BOM, then valid UTF-8 before guessing 8-bit encodings.
+// Whole words of high bytes suggest Cyrillic or
+// Arabic; common letter pairs separate Greek from Cyrillic. Turkish-specific
+// letters next to ASCII letters distinguish 1254 from the Latin fallback.
 //
 // ARABE (Windows-1256, #247 #261) tambem e feito de palavras de bytes altos, e
 // se separa do cirilico pela FAIXA: no 1256 as letras ficam em 0xC1-0xDF mais
@@ -544,6 +541,21 @@ static const unsigned short CP1251_80[64] = {
   0x0452,0x2018,0x2019,0x201C,0x201D,0x2022,0x2013,0x2014,0xFFFD,0x2122,0x0459,0x203A,0x045A,0x045C,0x045B,0x045F,
   0x00A0,0x040E,0x045E,0x0408,0x00A4,0x0490,0x00A6,0x00A7,0x0401,0x00A9,0x0404,0x00AB,0x00AC,0x00AD,0x00AE,0x0407,
   0x00B0,0x00B1,0x0406,0x0456,0x0491,0x00B5,0x00B6,0x00B7,0x0451,0x2116,0x0454,0x00BB,0x0458,0x0405,0x0455,0x0457 };
+
+static const unsigned short CP1253_80[128] = {
+  0x20AC,0xFFFD,0x201A,0x0192,0x201E,0x2026,0x2020,0x2021,0xFFFD,0x2030,0xFFFD,0x2039,0xFFFD,0xFFFD,0xFFFD,0xFFFD,
+  0xFFFD,0x2018,0x2019,0x201C,0x201D,0x2022,0x2013,0x2014,0xFFFD,0x2122,0xFFFD,0x203A,0xFFFD,0xFFFD,0xFFFD,0xFFFD,
+  0x00A0,0x0385,0x0386,0x00A3,0x00A4,0x00A5,0x00A6,0x00A7,0x00A8,0x00A9,0xFFFD,0x00AB,0x00AC,0x00AD,0x00AE,0x2015,
+  0x00B0,0x00B1,0x00B2,0x00B3,0x0384,0x00B5,0x00B6,0x00B7,0x0388,0x0389,0x038A,0x00BB,0x038C,0x00BD,0x038E,0x038F,
+  0x0390,0x0391,0x0392,0x0393,0x0394,0x0395,0x0396,0x0397,0x0398,0x0399,0x039A,0x039B,0x039C,0x039D,0x039E,0x039F,
+  0x03A0,0x03A1,0xFFFD,0x03A3,0x03A4,0x03A5,0x03A6,0x03A7,0x03A8,0x03A9,0x03AA,0x03AB,0x03AC,0x03AD,0x03AE,0x03AF,
+  0x03B0,0x03B1,0x03B2,0x03B3,0x03B4,0x03B5,0x03B6,0x03B7,0x03B8,0x03B9,0x03BA,0x03BB,0x03BC,0x03BD,0x03BE,0x03BF,
+  0x03C0,0x03C1,0x03C2,0x03C3,0x03C4,0x03C5,0x03C6,0x03C7,0x03C8,0x03C9,0x03CA,0x03CB,0x03CC,0x03CD,0x03CE,0xFFFD };
+// 1254 differs from 1252 at six Latin letters (and four undefined slots).
+static const unsigned short CP1254_D0[48] = {
+  0x011E,0x00D1,0x00D2,0x00D3,0x00D4,0x00D5,0x00D6,0x00D7,0x00D8,0x00D9,0x00DA,0x00DB,0x00DC,0x0130,0x015E,0x00DF,
+  0x00E0,0x00E1,0x00E2,0x00E3,0x00E4,0x00E5,0x00E6,0x00E7,0x00E8,0x00E9,0x00EA,0x00EB,0x00EC,0x00ED,0x00EE,0x00EF,
+  0x011F,0x00F1,0x00F2,0x00F3,0x00F4,0x00F5,0x00F6,0x00F7,0x00F8,0x00F9,0x00FA,0x00FB,0x00FC,0x0131,0x015F,0x00FF };
 
 static const unsigned short CP1256_80[128] = {
   0x20AC,0x067E,0x201A,0x0192,0x201E,0x2026,0x2020,0x2021,0x02C6,0x2030,0x0679,0x2039,0x0152,0x0686,0x0698,0x0688,
@@ -606,19 +618,47 @@ char *legenda_utf8(const char *bytes, long n, const char **origem) {
       memcpy(out, b, (size_t)n); out[n] = 0;
     } else {
       long altos = 0, colados = 0, soRusso = 0, soltasArabe = 0;
-      int cir, ara;
-      for (i = 0; i < n; i++)
-        if (b[i] >= 0xC0) {
-          unsigned c = b[i];
+      long gregas = 0, russas = 0, turcas = 0, latinas = 0;
+      int cir, ara, gre, tur;
+      // ponytail: small pair scores, not a language model; expand with real failures.
+      static const unsigned short paresGregos[] = {
+        0xE5E9,0xE9E1,0xF3EF,0xEFF5,0xEAFC,0xFCF3,0xF3EC,0xECE5,
+        0xEAE1,0xE1EB,0xEBE7,0xE7EC,0xECDD,0xDDF1,0xF1E1,0xE5DF,
+        0xDFF0,0xF0E5,0xF4EF,0xEDE1,0xE1E9,0xF4E7,0xF3E5,0xE5F2 };
+      static const unsigned short paresRussos[] = {
+        0xF1F2,0xEDEE,0xF2EE,0xEDE0,0xE5ED,0xEEE2,0xEDE8,0xF0E0,
+        0xE2EE,0xEAEE,0xEFF0,0xF0E8,0xE2E5,0xE5F2,0xEAE0,0xE4E5,
+        0xEBE0,0xEEF1,0xF2FC,0xF2E0,0xE5F0,0xEEF0,0xEEEB,0xF0EE };
+      for (i = 0; i < n; i++) {
+        unsigned c = b[i];
+        if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) latinas++;
+        if ((c == 0xD0 || c == 0xDD || c == 0xDE || c == 0xF0 || c == 0xFD || c == 0xFE) &&
+            ((i && ((b[i-1] >= 'A' && b[i-1] <= 'Z') || (b[i-1] >= 'a' && b[i-1] <= 'z'))) ||
+             (i + 1 < n && ((b[i+1] >= 'A' && b[i+1] <= 'Z') || (b[i+1] >= 'a' && b[i+1] <= 'z')))))
+          turcas += (c == 0xDD || c == 0xFD) ? 2 : 1;
+        if (i + 1 < n && c >= 0xC0 && b[i+1] >= 0xC0) {
+          unsigned a = c, z = b[i+1];
+          if (a >= 0xC1 && a <= 0xD9) a += 0x20;
+          if (z >= 0xC1 && z <= 0xD9) z += 0x20;
+          unsigned par = a << 8 | z;
+          for (size_t k = 0; k < sizeof paresGregos / sizeof paresGregos[0]; k++)
+            if (par == paresGregos[k]) gregas++;
+          for (size_t k = 0; k < sizeof paresRussos / sizeof paresRussos[0]; k++)
+            if (par == paresRussos[k]) russas++;
+        }
+        if (c >= 0xC0) {
           altos++;
           if ((i && b[i-1] >= 0xC0) || (i + 1 < n && b[i+1] >= 0xC0)) colados++;
           if (c == 0xE0 || c == 0xE2 || (c >= 0xE7 && c <= 0xEB) || c == 0xEE || c == 0xEF) soRusso++;
           else if (c == 0xE1 || (c >= 0xE3 && c <= 0xE6) || c == 0xEC || c == 0xED) soltasArabe++;
         }
+      }
       cir = altos >= 8 && colados * 2 > altos;
       ara = cir && soRusso * 10 < altos && soltasArabe * 10 >= altos;
-      if (ara) cir = 0;
-      o = ara ? "windows-1256" : cir ? "windows-1251" : "windows-1252";
+      gre = cir && !ara && gregas >= 3 && gregas > russas * 2;
+      tur = !ara && !gre && latinas >= 4 && latinas * 2 > altos && turcas >= 2;
+      if (ara || gre || tur) cir = 0;
+      o = ara ? "windows-1256" : gre ? "windows-1253" : tur ? "windows-1254" : cir ? "windows-1251" : "windows-1252";
       d = out = malloc((size_t)n * 3 + 1);
       if (!out) return NULL;
       for (i = 0; i < n; i++) {
@@ -626,6 +666,9 @@ char *legenda_utf8(const char *bytes, long n, const char **origem) {
         if (!c) continue;
         if (c < 0x80) cp = c;
         else if (ara) cp = CP1256_80[c - 0x80];
+        else if (gre) cp = CP1253_80[c - 0x80];
+        else if (tur && c >= 0xD0) cp = CP1254_D0[c - 0xD0];
+        else if (tur && (c == 0x8E || c == 0x9E)) cp = 0xFFFD;
         else if (cir) cp = c >= 0xC0 ? 0x0410 + (c - 0xC0) : CP1251_80[c - 0x80];
         else cp = c < 0xA0 ? CP1252_80[c - 0x80] : c;
         d += poeUtf8(d, cp);

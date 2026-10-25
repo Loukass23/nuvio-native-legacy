@@ -85,10 +85,10 @@ int  legenda_cues(double posSeg, int atrasoMs, LegendaCue *dst, int max);
  * "-->" e um `Dialogue:` nao tem nenhum, entao um ASS perfeitamente valido
  * devolvia ZERO blocos e a tela ficava sem legenda sem dizer por que. */
 int legenda_extrair(const char *corpo, LegendaCue **saida);
-// Bytes do arquivo de legenda -> texto UTF-8 terminado em NUL (malloc; o
-// chamador libera). UTF-16 com BOM, UTF-8 (com ou sem BOM), e o resto como
-// Windows-1252, ou 1251 quando o texto e cirilico. `origem` (opcional) diz qual
-// foi lido. NULL so sem memoria.
+// Subtitle bytes -> NUL-terminated UTF-8 (malloc; caller frees).
+// UTF-16 with BOM, UTF-8 with/without BOM, otherwise heuristic Windows
+// 1252/1251/1253/1254/1256. Optional `origem` reports the detected encoding.
+// Returns NULL for invalid arguments or allocation failure.
 char *legenda_utf8(const char *bytes, long n, const char **origem);
 
 /* Os dois parsers, expostos para o teste poder cobrir cada um sem depender da
