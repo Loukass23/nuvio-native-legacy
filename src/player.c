@@ -951,7 +951,7 @@ static int modalToquePode(void) { return !modalToqueGuarda || modalToqueGuarda()
 #endif
 // "Fonte 2 de 3": a tentativa do automatico VOD (app.c, tentarProximaFonteVOD).
 static int tentativaN, tentativaM;
-static int durFonteAvisada, durFontePulou, pedProximaFonte;
+static int durFonteAvisada, durFontePulou, pedProximaFonte, durFonteForaCache;
 // O arquivo e bem MAIS CURTO que o titulo (metade ou menos): pode ser uma
 // parte de um filme em partes (partes.h). app.c procura as outras.
 static int durFonteCurta;
@@ -1932,7 +1932,7 @@ void player_abrir(int indiceCatalogo, const char *url) {
     if (canalSessao) { guia_carregar(); epg_iniciar(); } }
   tocando = 1; pausaPessoa = 0; retomandoSalto = 0; visivel = 1; anim = 0.0f; entrada = 0.0f; soBarra = 0; cheio = 1.0f; fileira = 1.0f;
   pedFontes = erroFonte = pedFaixas = pedProxT = pedProxE = trocaEpisodio = 0; inicioImagem = 0;
-  durFonteAvisada = durFontePulou = pedProximaFonte = durFonteCurta = 0;
+  durFonteAvisada = durFontePulou = pedProximaFonte = durFonteCurta = durFonteForaCache = 0;
   durFonteAcaoAte = 0; durFonteSkipEm = 0; durFonteManter = 0;
   abrindoExp = 0; abrindoT = 0.0f; abrindoDesde = 0;
   memset(&cine, 0, sizeof cine);
@@ -2300,7 +2300,7 @@ void player_definir_fonte(const char *url) {
   fonteAcaoInvalidar();
   // A primeira fonte ainda pode aproveitar a legenda antecipada na espera.
   if (comVideo) legenda_pre_descartar(i18n("troca de fonte"));
-  durFonteAvisada = pedProximaFonte = durFonteCurta = 0;
+  durFonteAvisada = pedProximaFonte = durFonteCurta = durFonteForaCache = 0;
   durFonteSkipEm = 0; durFonteManter = 0;
   // Fonte nova: a duracao esperada conhecida nao vale mais (mesmo titulo,
   // episodio outro, catalogo pode ter andado).
@@ -3543,6 +3543,7 @@ void player_confirmar_partes(void) {
   durFonteAcaoAte = 0;
 }
 int player_parece_parte(void) { return durFonteCurta && !ehCanal(); }
+int player_fonte_fora_cache(void) { return durFonteForaCache; }
 int player_aviso_duracao_ativo(void) {
   return durFonteAcaoAte && (int)(SDL_GetTicks() - durFonteAcaoAte) < 0;
 }
@@ -3600,6 +3601,19 @@ static void durFonteAtualizar(double real, Uint32 agora) {
   if (esperada <= 0 || fabs(real - esperada) <= 600 ||
       !(real > esperada * 2 || real < esperada * .5)) return;
   durFonteAvisada = 1;
+  // A short warning clip is not another edition or a playable movie part.
+  if (real <= 120 && real < esperada * .5) {
+    durFonteForaCache = 1;
+    durFonteCurta = 0;
+    durFonteSkipEm = durFonteAcaoAte = toastAte = 0;
+    durFonteManter = 0;
+    video_parar(); comVideo = 0;
+    player_erro_fonte_motivo(i18n("Fora do cache"),
+        i18n("O link levou a um vídeo de aviso: expirado ou fora de cache."));
+    printf("[fonte] warning clip: real=%.0fs expected=%.0fs; stopped, not cached\n", real, esperada);
+    fflush(stdout);
+    return;
+  }
   durFonteCurta = real < esperada * .5;
   if (duracaook_tem(sessao_usuario(), perfis_ativo(), durFonteTitulo())) {
     printf("[fonte] duracao incompatível: real=%.0fs esperada=%.0fs; kept: this title keeps sources of another length (OK earlier)\n",
@@ -4757,6 +4771,7 @@ void player_atualizar(float dt, Uint32 agora) {
     if (d > 1.0) {
       duracaoSeg = (float)d; duracaoReal = 1;
       durFonteAtualizar(d, agora);
+      if (durFonteForaCache) return;
     }
     durFonteContagem(agora);
     // MINIATURAS DO SEEKR: so com a duracao REAL (o servico escolhe a versao

@@ -3365,6 +3365,22 @@ static void tentarProximaFonteVOD(void) {
   int atual, motivo = 0;
   if (!fonteVODAutomatica || player_id_canal()[0] || !player_aberto() ||
       player_quer_sair() || aguardandoFonte != 0 || !fonteVODDesde) return;
+  // Warning clips already stopped their pipeline: never reconnect or retry
+  // that provider. Preserve the not-cached card when no alternative remains.
+  if (player_fonte_fora_cache()) {
+    atual = stream_atual();
+    const Stream *s = stream_item(atual);
+    stream_automatico_excluir_aviso(atual);
+    if (fonteFalha && s && s->debridServico > 0)
+      fontefalha_provedor_recusado(fonteFalha, s->debridServico - 1);
+    int tem = fonteFalha ? stream_falha_tem_proxima(fonteFalha, fonteFalhaLista)
+                        : fonteVODTentativas < VOD_FONTE_MAX_TENTATIVAS && stream_proxima_vod(atual) >= 0;
+    if (!tem) { fonteVODAutomatica = 0; return; }
+    player_voltar_a_esperar();
+    player_toast(i18n("Fonte fora do cache: o debrid começa a baixar. Se tocar um aviso curto, tente de novo em alguns minutos."), 7000);
+    (void)pedirProximaFonteVOD(atual);
+    return;
+  }
   // Rede caiu com o video andando: a mesma fonte esta sendo recarregada
   // (video_reconexao.h). So vira troca de fonte quando ela desistir (falhou).
   if (video_reconectando()) return;
