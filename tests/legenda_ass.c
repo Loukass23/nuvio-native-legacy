@@ -174,6 +174,10 @@ int main(void) {
       { "\xD1\xE5\xE3\xEE\xE4\xED\xFF \xF5\xEE\xF0\xEE\xF8\xE8\xE9 \xE4\xE5\xED\xFC. \xDF \xEB\xFE\xE1\xEB\xFE \xF2\xE5\xE1\xFF!", "Сегодня хороший день. Я люблю тебя!", "windows-1251" },
       { "\xC9T\xC9 \xC0 PARIS \x97 No\xEBl", "ÉTÉ À PARIS — Noël", "windows-1252" },
       { "\xDEingvellir \xF0 og \xFE", "Þingvellir ð og þ", "windows-1252" },
+      { "\xDE" "a\xF0 er \xFE" "etta.", "Það er þetta.", "windows-1252" },
+      { "\xD3\xEC\xE5\xE9, \xF3\xEC\xE5\xE9, \xF3\xEC\xE5\xE9!", "Умей, умей, умей!", "windows-1251" },
+      // A lone Turkish ş shares its byte with Icelandic þ: preserve the fallback.
+      { "Her \xFE" "ey \xE7ok g\xFCzel.", "Her þey çok güzel.", "windows-1252" },
       { "Γεια σου κόσμε — İstanbul", "Γεια σου κόσμε — İstanbul", "utf-8" }
     };
     for (size_t k = 0; k < sizeof extra / sizeof extra[0]; k++) {
