@@ -2,7 +2,7 @@
 
 Changes since `v2.0.8`, from local commit and branch snapshots. Integration does not confirm installation on a TV. English follows the owner’s current language override.
 
-Tracking refreshed against the supplied snapshot through `650bc53eb` (integration merge `207789092`); all user-facing non-merge commits remain covered. Open branch references remain in Pending. Snapshot issues #714 and #715 remain awaiting triage; see the keeper state report for all unmapped issues. Android build and installation succeeded at `cb7ece972`; C9 installation failed, leaving the installed TV revision unconfirmed. See the keeper state report for subsequent merges.
+Tracking refreshed against the supplied snapshot through `650bc53eb` (integration merge `207789092`); all user-facing non-merge commits remain covered. Open branch references remain in Pending. Snapshot has 31 open issues without a mapped job or prompt; see the keeper state report for all unmapped issues. Android build and installation succeeded at `cb7ece972`; C9 installation failed, leaving the installed TV revision unconfirmed. See the keeper state report for subsequent merges.
 
 
 ## Highlights
@@ -183,7 +183,7 @@ Tracking refreshed against the supplied snapshot through `650bc53eb` (integratio
 
 ## Internal
 
-- **Tracking snapshot maintenance**: Keep issue states and release documentation aligned with local integration evidence. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: `38275cb19`, `fa37ec504`, `5cb2ea0f6`, `c7cfcb790`.
+- **Tracking snapshot maintenance**: Keep issue states and release documentation aligned with local integration evidence. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: `d44b064b9`, `38275cb19`, `fa37ec504`, `5cb2ea0f6`, `c7cfcb790`.
 
 - **Latest tracking snapshot**: Keep issue tracking aligned with the integration snapshot. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: `0d0bc2eaf`, `a0b4a6494`, `c3cb5ad2f`, `5769b03ec`, `6b9683db5`, `a0bcaf6e8`, `16b27d23a`, `c14d11f36`, `97c62989a`, `5404c634b`, `f6a6c3934`, `70e3ed2d3`, `279078d58`.
 
