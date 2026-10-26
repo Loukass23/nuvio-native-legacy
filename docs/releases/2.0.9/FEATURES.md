@@ -2,7 +2,7 @@
 
 Changes since `v2.0.8`, from local commit and branch snapshots. Integration does not confirm installation on a TV. English follows the owner’s current language override.
 
-Tracking refreshed 2026-10-26 against the supplied snapshot through `9df32b213` (integration merge `207789092`); all user-facing non-merge commits remain covered. Open branch references remain in Pending. Snapshot has 32 open issues without a mapped job or prompt; see the keeper state report for all unmapped issues. Android build and installation succeeded at `cb7ece972`; C9 installation failed, leaving the installed TV revision unconfirmed. See the keeper state report for subsequent merges.
+Tracking refreshed 2026-10-26T16:58:43-03:00 against supplied snapshot through `49329fef8`; all non-merge commits remain covered. Open branches remain Pending. Snapshot has 32 open issues without a mapped job or prompt. Android build and installation succeeded at `cb7ece972`; C9 installation failed, leaving TV revision unconfirmed. See external estado.md for later merges and complete lost-item lists.
 
 
 ## Highlights
@@ -183,7 +183,7 @@ Tracking refreshed 2026-10-26 against the supplied snapshot through `9df32b213` 
 
 ## Internal
 
-- **Tracking snapshot maintenance**: Additional refs: `73833e5ee`. Keep issue states and release documentation aligned with local integration evidence. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: `d44b064b9`, `38275cb19`, `fa37ec504`, `5cb2ea0f6`, `c7cfcb790`.
+- **Tracking snapshot maintenance**: Additional refs: `49329fef8`, `71d6d4856`, `2cdc168f4`. Additional refs: `73833e5ee`. Keep issue states and release documentation aligned with local integration evidence. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: `d44b064b9`, `38275cb19`, `fa37ec504`, `5cb2ea0f6`, `c7cfcb790`.
 
 - **Latest tracking snapshot**: Keep issue tracking aligned with the integration snapshot. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: `0d0bc2eaf`, `a0b4a6494`, `c3cb5ad2f`, `5769b03ec`, `6b9683db5`, `a0bcaf6e8`, `16b27d23a`, `c14d11f36`, `97c62989a`, `5404c634b`, `f6a6c3934`, `70e3ed2d3`, `279078d58`.
 
