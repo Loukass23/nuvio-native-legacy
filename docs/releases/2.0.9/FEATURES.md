@@ -2,7 +2,7 @@
 
 Changes since `v2.0.8`, from local commit and branch snapshots. Integration does not confirm installation on a TV. English follows the owner’s current language override.
 
-Tracking refreshed against the supplied snapshot through `5769b03ec`; all listed non-merge commits remain covered. Android build and installation succeeded at `cb7ece972`; C9 installation failed, leaving the installed TV revision unconfirmed. See the keeper state report for subsequent merges.
+Tracking refreshed against the supplied snapshot through `a0b4a6494`; all listed non-merge commits remain covered. Android build and installation succeeded at `cb7ece972`; C9 installation failed, leaving the installed TV revision unconfirmed. See the keeper state report for subsequent merges.
 
 
 ## Highlights
@@ -35,6 +35,8 @@ Tracking refreshed against the supplied snapshot through `5769b03ec`; all listed
 - **See all in the Library row**: Open the full Library from a See all card at the end of the Home row. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: #672, `d316b4dbd`.
 
 ## Fixes
+
+- **Resume saved sources sooner, with recovery intact**: Continue Watching opens the saved source before background verification finishes and returns to normal source selection if playback later fails, preserving the recovery position. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: owner request, `agente/205-cw-lento`, merge `b57890150`, `bd1b872a4`, `e765b53d5`.
 
 - **Embedded subtitles survive memory pressure**: Subtitles keep following playback when the app frees rendering caches. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: owner request, `agente/205-legembut`, `5c850d8ea`, merge `d3663f9c7`.
 
