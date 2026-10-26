@@ -2,7 +2,7 @@
 
 Changes since `v2.0.8`, from local commit and branch snapshots. Integration does not confirm installation on a TV. English follows the owner’s current language override.
 
-Tracking refreshed against the supplied snapshot through `650bc53eb` (integration merge `207789092`); all user-facing non-merge commits remain covered. Open branch references remain in Pending. Snapshot has 31 open issues without a mapped job or prompt; see the keeper state report for all unmapped issues. Android build and installation succeeded at `cb7ece972`; C9 installation failed, leaving the installed TV revision unconfirmed. See the keeper state report for subsequent merges.
+Tracking refreshed against the supplied snapshot through `73833e5ee` (integration merge `207789092`); all user-facing non-merge commits remain covered. Open branch references remain in Pending. Snapshot has 31 open issues without a mapped job or prompt; see the keeper state report for all unmapped issues. Android build and installation succeeded at `cb7ece972`; C9 installation failed, leaving the installed TV revision unconfirmed. See the keeper state report for subsequent merges.
 
 
 ## Highlights
