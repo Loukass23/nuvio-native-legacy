@@ -5715,7 +5715,7 @@ void app_atualizar(float dt, Uint32 agora) {
             ProxSugestao prox;
             tocar = 0;
             cwTocarT = cwTocarE = 0;
-            if (k >= 0 && cat_n_episodios(k) > 0) {
+            if (cat_episodios_finais(k, cw->imdb)) {
               if (prox_seguinte(cw, cat_episodio(k, 0), cat_n_episodios(k),
                                 ajustes_cw_concluido(),
                                 (long long)time(NULL) * 1000LL, &prox)) {
@@ -5731,7 +5731,16 @@ void app_atualizar(float dt, Uint32 agora) {
             }
           }
         }
+        if (tocar && cw && !strcmp(cw->tipo, "series") &&
+            !cat_episodio_existe_final(cat_indice_titulo(cw->imdb, it.indice),
+                                      cw->imdb, cwTocarT, cwTocarE)) {
+          cwEsperaItem = *cw;
+          cwEsperaDesde = SDL_GetTicks();
+          cwEspera = 2; // Resume the current episode once metadata publishes its video ID.
+          tocar = 0;
+        }
         abrirTitulo(&it, 1, 1);
+        if (cwEspera) desc_episodios(detail_indice(), 0);
         if (tocar) detail_pedir_reproduzir();
       }
     } else if (tela == TELA_BUSCA && busca_pediu_pessoa(&pedPessoa)) {
@@ -5764,10 +5773,16 @@ void app_atualizar(float dt, Uint32 agora) {
       cwEspera = 0; cwTocarT = cwTocarE = 0;
     } else {
       int k = cat_indice_titulo(cwEsperaItem.imdb, detail_indice());
-      if (k >= 0 && cat_n_episodios(k) > 0) {
+      if (cat_episodios_finais(k, cwEsperaItem.imdb) &&
+          (cwEspera != 2 || cat_episodio_existe_final(k, cwEsperaItem.imdb,
+                             cwEsperaItem.temporada, cwEsperaItem.episodio))) {
         ProxSugestao prox;
+        int retomar = cwEspera == 2;
         cwEspera = 0; cwTocarT = cwTocarE = 0;
-        if (prox_seguinte(&cwEsperaItem, cat_episodio(k, 0), cat_n_episodios(k),
+        if (retomar) {
+          cwTocarT = cwEsperaItem.temporada; cwTocarE = cwEsperaItem.episodio;
+          detail_pedir_reproduzir();
+        } else if (prox_seguinte(&cwEsperaItem, cat_episodio(k, 0), cat_n_episodios(k),
                           ajustes_cw_concluido(),
                           (long long)time(NULL) * 1000LL, &prox)) {
           cwTocarT = prox.temporada; cwTocarE = prox.episodio;
@@ -5817,7 +5832,7 @@ void app_atualizar(float dt, Uint32 agora) {
           if (strcmp(pendAlvo, alvo)) { snprintf(pendAlvo, sizeof pendAlvo, "%s", alvo); pendDesde = SDL_GetTicks(); }
           esperaFoco = SDL_GetTicks() - pendDesde < 1200u;
         } }
-      if (!player_aberto() && aguardandoFonte != 2 && ci && ci->imdb[0] && !esperaFoco &&
+      if (!cwEspera && !player_aberto() && aguardandoFonte != 2 && ci && ci->imdb[0] && !esperaFoco &&
           (strcmp(alvo, ultimoAlvo) || (detail_aberto() && ultimaVersao != addons_versao()))) {
         if (!strcmp(alvo, ultimoAlvo)) printf("[addons] lista mudou: refazendo a busca de fontes de %s\n", alvo);
         snprintf(ultimoAlvo, sizeof ultimoAlvo, "%s", alvo);
