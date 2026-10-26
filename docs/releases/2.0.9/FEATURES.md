@@ -2,7 +2,7 @@
 
 Changes since `v2.0.8`, from local commit and branch snapshots. Integration does not confirm installation on a TV. English follows the owner’s current language override.
 
-Tracking refreshed against the supplied snapshot through `6b9683db5`; all listed non-merge commits remain covered. Android build and installation succeeded at `cb7ece972`; C9 installation failed, leaving the installed TV revision unconfirmed. See the keeper state report for subsequent merges.
+Tracking refreshed against the supplied snapshot through `5769b03ec`; all listed non-merge commits remain covered. Android build and installation succeeded at `cb7ece972`; C9 installation failed, leaving the installed TV revision unconfirmed. See the keeper state report for subsequent merges.
 
 
 ## Highlights
@@ -35,6 +35,8 @@ Tracking refreshed against the supplied snapshot through `6b9683db5`; all listed
 - **See all in the Library row**: Open the full Library from a See all card at the end of the Home row. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: #672, `d316b4dbd`.
 
 ## Fixes
+
+- **Embedded subtitles survive memory pressure**: Subtitles keep following playback when the app frees rendering caches. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: owner request, `agente/205-legembut`, `5c850d8ea`, merge `d3663f9c7`.
 
 - **Readable Greek and Turkish subtitles**: Decode legacy Greek and Turkish subtitles using the declared language while preserving Ukrainian, Icelandic and ambiguous legacy encodings. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: owner request, `agente/205-legcharset`, merge `6330e8be0`, `dbb4af7da`, `064b15d42`, `76edd93f5`, `92acda7dd`, `1a01e4be8`, `4ca84241b`.
 
@@ -130,7 +132,7 @@ Tracking refreshed against the supplied snapshot through `6b9683db5`; all listed
 
 - **Artwork recovery on low-memory TVs**: Request smaller artwork and recover from memory pressure without leaving visible images grey. Platforms: webOS. Refs: #676, `agente/205-676-arte`, `e3427954b`.
 
-- **Stable Home row focus**: Keep the selected item identity current after navigation so later row refreshes preserve focus. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: #677, `agente/205-677-foco`, `e94610c5b`.
+- **Stable Home row focus**: Keep the selected item identity current after navigation so later row refreshes preserve focus. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: #677, `agente/205-677-foco`, `e94610c5b`, `bc76197cc`, merge `efc243c39`; saved positions also refresh after row rebuilds.
 
 - **Personalized add-on catalogs**: Apply required manifest defaults when requesting catalogs such as AI for you. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: #678, `agente/205-678-aiforyou`, `99d7014da`.
 
@@ -177,7 +179,7 @@ Tracking refreshed against the supplied snapshot through `6b9683db5`; all listed
 
 ## Internal
 
-- **Latest tracking snapshot**: Keep issue tracking aligned with the integration snapshot. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: `6b9683db5`, `a0bcaf6e8`, `16b27d23a`, `c14d11f36`, `97c62989a`, `5404c634b`, `f6a6c3934`, `70e3ed2d3`, `279078d58`.
+- **Latest tracking snapshot**: Keep issue tracking aligned with the integration snapshot. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: `5769b03ec`, `6b9683db5`, `a0bcaf6e8`, `16b27d23a`, `c14d11f36`, `97c62989a`, `5404c634b`, `f6a6c3934`, `70e3ed2d3`, `279078d58`.
 
 - **Episode and playback regression coverage**: Validate alternate numbering, topology replacement, retries, canonical scrobbles and isolated Home refresh fixtures. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: `6537b2a36`, `be51fbfd0`, `587b8774b`, `f3ccc5b23`.
 
