@@ -3050,6 +3050,7 @@
   { "Mostrar ano no destaque", "Show year on hero" },
   { "Mostrar avançados · %d", "Show advanced · %d" },
   { "Mostrar destaque", "Show hero" },
+  { "Mostrar detalhes da pasta no destaque", "Show folder details on hero" },
   { "Mostrar duração no destaque", "Show runtime on hero" },
   { "Mostrar episódios não exibidos", "Show unaired episodes" },
   { "Mostrar gênero no destaque", "Show genre on hero" },

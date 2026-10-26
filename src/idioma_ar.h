@@ -3051,6 +3051,7 @@
   T("Mostrar ano no destaque", "إظهار السنة في الواجهة"),
   T("Mostrar avançados · %d", "إظهار المتقدم · %d"),
   T("Mostrar destaque", "إظهار الواجهة"),
+  T("Mostrar detalhes da pasta no destaque", "إظهار تفاصيل المجلد في الواجهة الرئيسية"),
   T("Mostrar duração no destaque", "إظهار المدة في الواجهة"),
   T("Mostrar episódios não exibidos", "إظهار الحلقات غير المعروضة"),
   T("Mostrar gênero no destaque", "إظهار النوع في الواجهة"),

@@ -3051,6 +3051,7 @@
   T("Mostrar ano no destaque", "Vis år i fremhevet"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "Vis hovedbanner"),
+  T("Mostrar detalhes da pasta no destaque", "Vis mappedetaljer i fremhevingen"),
   T("Mostrar duração no destaque", "Vis spilletid i fremhevet"),
   T("Mostrar episódios não exibidos", "Vis episoder som ikke er sendt ennå"),
   T("Mostrar gênero no destaque", "Vis sjanger i fremhevet"),

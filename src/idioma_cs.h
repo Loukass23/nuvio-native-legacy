@@ -3051,6 +3051,7 @@
   T("Mostrar ano no destaque", "Zobrazit rok ve zvýrazněném"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "Zobrazit hlavní baner"),
+  T("Mostrar detalhes da pasta no destaque", "Zobrazit podrobnosti složky ve zvýraznění"),
   T("Mostrar duração no destaque", "Zobrazit délku ve zvýrazněném"),
   T("Mostrar episódios não exibidos", "Zobrazit dosud nevysílané epizody"),
   T("Mostrar gênero no destaque", "Zobrazit žánr ve zvýrazněném"),

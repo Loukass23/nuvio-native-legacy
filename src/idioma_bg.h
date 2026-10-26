@@ -3051,6 +3051,7 @@
   T("Mostrar ano no destaque", "Показване на годината в акцента"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "Показвай главния банер"),
+  T("Mostrar detalhes da pasta no destaque", "Показвай подробности за папката в акцента"),
   T("Mostrar duração no destaque", "Показване на времетраенето в акцента"),
   T("Mostrar episódios não exibidos", "Показвай неизлъчените епизоди"),
   T("Mostrar gênero no destaque", "Показване на жанра в акцента"),

@@ -3051,6 +3051,7 @@
   T("Mostrar ano no destaque", "Prikaži godinu u izdvojenom"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "Prikaži glavni prikaz"),
+  T("Mostrar detalhes da pasta no destaque", "Prikaži detalje fascikle u istaknutom prikazu"),
   T("Mostrar duração no destaque", "Prikaži trajanje u izdvojenom"),
   T("Mostrar episódios não exibidos", "Prikaži neemitovane epizode"),
   T("Mostrar gênero no destaque", "Prikaži žanr u izdvojenom"),

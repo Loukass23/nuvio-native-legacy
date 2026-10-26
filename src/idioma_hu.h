@@ -3051,6 +3051,7 @@
   T("Mostrar ano no destaque", "Év megjelenítése a kiemelésben"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "Főkép megjelenítése"),
+  T("Mostrar detalhes da pasta no destaque", "Mappa részleteinek megjelenítése a kiemelésben"),
   T("Mostrar duração no destaque", "Játékidő megjelenítése a kiemelésben"),
   T("Mostrar episódios não exibidos", "Még nem adott epizódok megjelenítése"),
   T("Mostrar gênero no destaque", "Műfaj megjelenítése a kiemelésben"),

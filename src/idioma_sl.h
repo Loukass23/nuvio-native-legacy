@@ -3051,6 +3051,7 @@
   T("Mostrar ano no destaque", "Pokaži leto v izpostavljenem"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "Prikaži glavni pas"),
+  T("Mostrar detalhes da pasta no destaque", "Prikaži podrobnosti mape v izpostavitvi"),
   T("Mostrar duração no destaque", "Pokaži trajanje v izpostavljenem"),
   T("Mostrar episódios não exibidos", "Prikaži še nepredvajane epizode"),
   T("Mostrar gênero no destaque", "Pokaži žanr v izpostavljenem"),

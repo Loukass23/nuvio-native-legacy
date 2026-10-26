@@ -3051,6 +3051,7 @@
   T("Mostrar ano no destaque", "注目枠に年を表示"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "ヒーローを表示"),
+  T("Mostrar detalhes da pasta no destaque", "ハイライトにフォルダーの詳細を表示"),
   T("Mostrar duração no destaque", "注目枠に上映時間を表示"),
   T("Mostrar episódios não exibidos", "未放送のエピソードを表示"),
   T("Mostrar gênero no destaque", "注目枠にジャンルを表示"),

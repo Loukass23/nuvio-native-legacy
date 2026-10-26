@@ -3051,6 +3051,7 @@
   T("Mostrar ano no destaque", "Pokaż rok w wyróżnieniu"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "Pokaż baner"),
+  T("Mostrar detalhes da pasta no destaque", "Pokaż szczegóły folderu w wyróżnieniu"),
   T("Mostrar duração no destaque", "Pokaż czas trwania w wyróżnieniu"),
   T("Mostrar episódios não exibidos", "Pokaż niewyemitowane odcinki"),
   T("Mostrar gênero no destaque", "Pokaż gatunek w wyróżnieniu"),

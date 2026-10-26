@@ -3051,6 +3051,7 @@
   T("Mostrar ano no destaque", "Öne çıkanda yılı göster"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "Banner'ı göster"),
+  T("Mostrar detalhes da pasta no destaque", "Öne çıkan alanda klasör ayrıntılarını göster"),
   T("Mostrar duração no destaque", "Öne çıkanda süreyi göster"),
   T("Mostrar episódios não exibidos", "Henüz yayınlanmamış bölümleri göster"),
   T("Mostrar gênero no destaque", "Öne çıkanda türü göster"),

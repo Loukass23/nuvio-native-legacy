@@ -3051,6 +3051,7 @@
   T("Mostrar ano no destaque", "Visa år i utvalt"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "Visa huvudbanner"),
+  T("Mostrar detalhes da pasta no destaque", "Visa mappdetaljer i blickfånget"),
   T("Mostrar duração no destaque", "Visa speltid i utvalt"),
   T("Mostrar episódios não exibidos", "Visa avsnitt som inte sänts än"),
   T("Mostrar gênero no destaque", "Visa genre i utvalt"),
