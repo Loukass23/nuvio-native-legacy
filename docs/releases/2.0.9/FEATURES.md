@@ -2,7 +2,7 @@
 
 Changes since `v2.0.8`, from local commit and branch snapshots. Integration does not confirm installation on a TV. English follows the owner’s current language override.
 
-Tracking refreshed against the supplied snapshot through `0d0bc2eaf`; all listed non-merge commits remain covered. Android build and installation succeeded at `cb7ece972`; C9 installation failed, leaving the installed TV revision unconfirmed. See the keeper state report for subsequent merges.
+Tracking refreshed against the supplied snapshot through `c7cfcb790`; all listed non-merge commits remain covered. Android build and installation succeeded at `cb7ece972`; C9 installation failed, leaving the installed TV revision unconfirmed. See the keeper state report for subsequent merges.
 
 
 ## Highlights
@@ -181,7 +181,7 @@ Tracking refreshed against the supplied snapshot through `0d0bc2eaf`; all listed
 
 ## Internal
 
-- **Latest tracking snapshot**: Keep issue tracking aligned with the integration snapshot. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: `c3cb5ad2f`, `5769b03ec`, `6b9683db5`, `a0bcaf6e8`, `16b27d23a`, `c14d11f36`, `97c62989a`, `5404c634b`, `f6a6c3934`, `70e3ed2d3`, `279078d58`.
+- **Latest tracking snapshot**: Keep issue tracking aligned with the integration snapshot. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: `0d0bc2eaf`, `a0b4a6494`, `c3cb5ad2f`, `5769b03ec`, `6b9683db5`, `a0bcaf6e8`, `16b27d23a`, `c14d11f36`, `97c62989a`, `5404c634b`, `f6a6c3934`, `70e3ed2d3`, `279078d58`.
 
 - **Episode and playback regression coverage**: Validate alternate numbering, topology replacement, retries, canonical scrobbles and isolated Home refresh fixtures. Platforms: webOS, Android, Samsung .tpk, WASM. Refs: `6537b2a36`, `be51fbfd0`, `587b8774b`, `f3ccc5b23`.
 
