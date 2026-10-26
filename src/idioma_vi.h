@@ -3051,6 +3051,7 @@
   T("Mostrar ano no destaque", "Hiện năm ở mục nổi bật"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "Hiển thị banner chính"),
+  T("Mostrar detalhes da pasta no destaque", "Hiện chi tiết thư mục trong tiêu điểm"),
   T("Mostrar duração no destaque", "Hiện thời lượng ở mục nổi bật"),
   T("Mostrar episódios não exibidos", "Hiển thị các tập chưa phát sóng"),
   T("Mostrar gênero no destaque", "Hiện thể loại ở mục nổi bật"),

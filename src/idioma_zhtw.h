@@ -3051,6 +3051,7 @@
   T("Mostrar ano no destaque", "在焦點推薦中顯示年份"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "顯示主視覺"),
+  T("Mostrar detalhes da pasta no destaque", "在焦點區域顯示資料夾詳細資訊"),
   T("Mostrar duração no destaque", "在焦點推薦中顯示片長"),
   T("Mostrar episódios não exibidos", "顯示未播出的集數"),
   T("Mostrar gênero no destaque", "在焦點推薦中顯示類型"),

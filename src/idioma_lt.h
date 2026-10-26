@@ -3051,6 +3051,7 @@
   T("Mostrar ano no destaque", "Rodyti metus išskirtiniame"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "Rodyti pagrindinį bloką"),
+  T("Mostrar detalhes da pasta no destaque", "Rodyti aplanko informaciją akcento srityje"),
   T("Mostrar duração no destaque", "Rodyti trukmę išskirtiniame"),
   T("Mostrar episódios não exibidos", "Rodyti dar netransliuotus epizodus"),
   T("Mostrar gênero no destaque", "Rodyti žanrą išskirtiniame"),

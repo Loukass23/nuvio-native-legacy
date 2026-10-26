@@ -3050,6 +3050,7 @@
   T("Mostrar ano no destaque", "Afișează anul în evidențiere"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "Arată bannerul principal"),
+  T("Mostrar detalhes da pasta no destaque", "Afișează detaliile dosarului în prim-plan"),
   T("Mostrar duração no destaque", "Afișează durata în evidențiere"),
   T("Mostrar episódios não exibidos", "Arată episoadele nedifuzate"),
   T("Mostrar gênero no destaque", "Afișează genul în evidențiere"),

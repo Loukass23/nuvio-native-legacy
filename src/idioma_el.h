@@ -3051,6 +3051,7 @@
   T("Mostrar ano no destaque", "Εμφάνιση έτους στο προβεβλημένο"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "Εμφάνιση banner"),
+  T("Mostrar detalhes da pasta no destaque", "Εμφάνιση λεπτομερειών φακέλου στην προβολή"),
   T("Mostrar duração no destaque", "Εμφάνιση διάρκειας στο προβεβλημένο"),
   T("Mostrar episódios não exibidos", "Εμφάνιση επεισοδίων που δεν έχουν προβληθεί ακόμα"),
   T("Mostrar gênero no destaque", "Εμφάνιση είδους στο προβεβλημένο"),

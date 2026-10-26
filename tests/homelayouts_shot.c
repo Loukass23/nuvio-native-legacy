@@ -102,7 +102,7 @@ static void gravar(const char *bmp) {
   }
   for (y = 0; y < 1080; y++)
     memcpy((char *)s->pixels + y * s->pitch, pix + (1079 - y) * 1920 * 4, 1920 * 4);
-  if (getenv("NV_HERO_FOCUS")) assert(IMG_SavePNG(s, bmp) == 0);
+  if (getenv("NV_HERO_FOCUS") || getenv("NV_FOLDER_DETAILS")) assert(IMG_SavePNG(s, bmp) == 0);
   else assert(SDL_SaveBMP(s, bmp) == 0);
   SDL_FreeSurface(s);
   free(pix);
@@ -450,6 +450,35 @@ int main(int argc, char **argv) {
   SDL_GL_DeleteContext(gl); SDL_DestroyWindow(janela); SDL_Quit();
   return rc;
 #endif
+
+  // Folder details use the real setting reader and production Home renderer.
+  if (getenv("NV_FOLDER_DETAILS")) {
+#ifdef NV_DINPALCO_AUDIT
+    for (const char *l = camadas; *l; l++) {
+      for (int off = 0; off < 2; off++) {
+        setenv("NV_AJ", off ? "heroFolderDetailsLocal 1" : "heroFolderDetailsLocal 0", 1);
+        ajusta(*l - '0', 0);
+        assert(ajustes_hero_pasta_detalhes() == !off);
+        quadros(2, NULL);
+        int collection = -1;
+        for (int r = 0; r < nFileiras; r++)
+          if (fileiras[r].tipo == FILEIRA_CATALOGOS) collection = r;
+        assert(collection >= 0);
+        focoHero = 0; foco.fileira = collection;
+        foco.coluna = foco.colunaLembrada[collection] = 0;
+        quadros(120, NULL);
+        snprintf(bmp, sizeof bmp, "%s-L%c-%s.png", saida, *l, off ? "after" : "before");
+        quadros(1, bmp);
+      }
+    }
+    tex_encerrar(); txt_encerrar();
+    SDL_GL_DeleteContext(gl); SDL_DestroyWindow(janela); SDL_Quit();
+    puts("folder hero details: default on and persisted off rendered");
+    return 0;
+#else
+    assert(0 && "folder details shots require NV_DINPALCO_AUDIT");
+#endif
+  }
 
   // Focused Moderna hero only: let real navigation settle before capturing.
   if (getenv("NV_HERO_FOCUS")) {

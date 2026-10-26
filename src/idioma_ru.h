@@ -3050,6 +3050,7 @@
   T("Mostrar ano no destaque", "Показывать год в подборке"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "Показывать главный баннер"),
+  T("Mostrar detalhes da pasta no destaque", "Показывать сведения о папке в главном блоке"),
   T("Mostrar duração no destaque", "Показывать длительность в подборке"),
   T("Mostrar episódios não exibidos", "Показывать невышедшие эпизоды"),
   T("Mostrar gênero no destaque", "Показывать жанр в подборке"),

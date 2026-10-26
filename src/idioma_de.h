@@ -3050,6 +3050,7 @@
   T("Mostrar ano no destaque", "Jahr im Highlight anzeigen"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "Highlight anzeigen"),
+  T("Mostrar detalhes da pasta no destaque", "Ordnerdetails im Highlight anzeigen"),
   T("Mostrar duração no destaque", "Dauer im Highlight anzeigen"),
   T("Mostrar episódios não exibidos", "Nicht ausgestrahlte Folgen anzeigen"),
   T("Mostrar gênero no destaque", "Genre im Highlight anzeigen"),

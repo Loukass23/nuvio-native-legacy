@@ -724,6 +724,7 @@ typedef enum {
   AJ_SUAVIZAR_DEGRADES, // Device-local, append-only: Automatic / Strong / Off.
   // Hero logo and information size (0 Normal, 1 Grande, 2 Muito grande). LOCAL, append-only.
   AJ_HERO_TAMANHO,
+  AJ_HERO_PASTA_DETALHES, // Device-local folder hero details, append-only; on by default.
   AJ_N
 } OpcaoId;
 _Static_assert(DEBRID_RD == 0 && DEBRID_TB == 1 && DEBRID_PM == 2 && DEBRID_AD == 3,
@@ -1861,6 +1862,7 @@ static const Opcao OPCOES[AJ_N] = {
   ESC("Mostrar o codec do áudio", V_LIGA, 2),          // local: plrCodecLocal
   ESC("Suavizar degradês", V_DEGRADES, 3),
   ESC("Tamanho do destaque", V_HERO_TAMANHO, 3),       // local: heroSizeLocal
+  ESC("Mostrar detalhes da pasta no destaque", V_LIGA, 2),
 };
 
 // Nome de cada opcao no arquivo. O formato era POSICIONAL — uma linha por
@@ -2193,6 +2195,7 @@ static const char *CHAVE[] = {
   "plrCodecLocal",
   "suavizarDegradesLocal",
   "heroSizeLocal",
+  "heroFolderDetailsLocal",
 };
 // QUATRO VETORES PARALELOS indexados pelo mesmo enum AJ_*: OPCOES, CHAVE,
 // valor e as secoes. OPCOES ja e declarado [AJ_N], e `valor` aceita inicializacao
@@ -3589,6 +3592,7 @@ int ajustes_hero_sinopse(void) { return lig(AJ_HERO_SINOPSE); }
 int ajustes_hero_notas(void)   { return lig(AJ_HERO_NOTAS); }
 int ajustes_hero_ano(void)     { return lig(AJ_HERO_ANO); }
 int ajustes_hero_duracao(void) { return lig(AJ_HERO_DURACAO); }
+int ajustes_hero_pasta_detalhes(void) { return lig(AJ_HERO_PASTA_DETALHES); }
 int ajustes_hero_cheio(void)          { return lig(AJ_HERO_CHEIO); }
 int ajustes_hero_sinopse_grande(void) { return valor[AJ_HERO_SINOPSE_TAM] == 1 || ajustes_hero_tamanho() > 0; }
 float ajustes_hero_escala_logo(void) { static const float e[3] = { 1.0f, 1.25f, 1.5f }; return e[ajustes_hero_tamanho()]; }
@@ -6012,6 +6016,7 @@ static int somenteDesteAparelho(int op) {
     case AJ_HERO_FUNDO:
     case AJ_HERO_SINOPSE_TAM:
     case AJ_HERO_TAMANHO:
+    case AJ_HERO_PASTA_DETALHES:
     case AJ_HERO_ARTE_DIF:
     case AJ_HERO_GENERO:
     case AJ_HERO_SINOPSE: case AJ_HERO_NOTAS: case AJ_HERO_ANO: case AJ_HERO_DURACAO: /* o web nao tem */
@@ -10757,7 +10762,7 @@ static AjPreview familiaPreviaOpcao(int op) {
       return AJPV_REPRO;
     case AJ_HOME_LAYOUT:
     case AJ_PALCO_FUNDO:
-    case AJ_HERO_SINOPSE_TAM: case AJ_HERO_TAMANHO:
+    case AJ_HERO_SINOPSE_TAM: case AJ_HERO_TAMANHO: case AJ_HERO_PASTA_DETALHES:
     case AJ_LANDSCAPE: case AJ_HERO_CHEIO: case AJ_FUNDO_DIN: case AJ_FUNDO_DIN_COR: case AJ_HERO_FUNDO:
     case AJ_HERO_ARTE_DIF: case AJ_HERO_TRAILER: case AJ_FIL_LIMITE:
     case AJ_ESPACO_FILEIRAS: case AJ_ESPACO_TITULOS:

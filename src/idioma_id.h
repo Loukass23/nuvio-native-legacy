@@ -3051,6 +3051,7 @@
   T("Mostrar ano no destaque", "Tampilkan tahun di sorotan"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "Tampilkan hero"),
+  T("Mostrar detalhes da pasta no destaque", "Tampilkan detail folder di sorotan"),
   T("Mostrar duração no destaque", "Tampilkan durasi di sorotan"),
   T("Mostrar episódios não exibidos", "Tampilkan episode yang belum tayang"),
   T("Mostrar gênero no destaque", "Tampilkan genre di sorotan"),

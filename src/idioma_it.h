@@ -3051,6 +3051,7 @@
   T("Mostrar ano no destaque", "Mostra l'anno in primo piano"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "Mostra hero"),
+  T("Mostrar detalhes da pasta no destaque", "Mostra i dettagli della cartella in evidenza"),
   T("Mostrar duração no destaque", "Mostra la durata in primo piano"),
   T("Mostrar episódios não exibidos", "Mostra episodi non ancora andati in onda"),
   T("Mostrar gênero no destaque", "Mostra il genere in primo piano"),

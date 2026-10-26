@@ -3051,6 +3051,7 @@
   T("Mostrar ano no destaque", "Jaar tonen in uitgelicht"),
   T("Mostrar avançados · %d", "Show advanced · %d"),
   T("Mostrar destaque", "Hero tonen"),
+  T("Mostrar detalhes da pasta no destaque", "Mapdetails in uitgelicht weergeven"),
   T("Mostrar duração no destaque", "Duur tonen in uitgelicht"),
   T("Mostrar episódios não exibidos", "Nog niet uitgezonden afleveringen tonen"),
   T("Mostrar gênero no destaque", "Genre tonen in uitgelicht"),
